@@ -10,7 +10,7 @@ import { ObjectId } from "mongodb";
 
 export async function GET() {
   try {
-    const mongoClient = new MongoClient('mongodb+srv://ctw39353:Trippy4195@askuga.il12y.mongodb.net/Users?retryWrites=true&w=majority');
+    const mongoClient = new MongoClient(process.env.MONGODB_URI!);
     const users = await mongoClient.db().collection<User>('Users').find({}).toArray();
     console.log(users);
     return NextResponse.json(users);
@@ -24,7 +24,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const mongoClient = new MongoClient('mongodb+srv://ctw39353:Trippy4195@askuga.il12y.mongodb.net/Users?retryWrites=true&w=majority');
+    const mongoClient = new MongoClient(process.env.MONGODB_URI!);
     const result = await mongoClient.db().collection<User>('Users').insertOne(body);
     
     return NextResponse.json(result);
