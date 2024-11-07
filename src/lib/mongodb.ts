@@ -1,20 +1,22 @@
-import { MongoClient } from 'mongodb'
+import mongoose from "mongoose";
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
-}
 
-// This should be the connection string from your VS Code extension
-// Copy it from the extension by right-clicking your connection and selecting "Copy Connection String"
-const uri = process.env.MONGODB_URI
-const options = {
-  // No need for SSL/TLS options if they're already in your connection string
-}
+const connectMongoDB = async (): Promise<void> => {
+ try {
+   const uri = process.env.MONGODB_URI;
+   console.log(uri);
+   if (!uri) {
+     throw new Error("MONGODB_URI is not defined in environment variables.");
+   }
 
-let client: MongoClient | undefined
-let clientPromise: Promise<MongoClient>
 
-client = new MongoClient(uri)
-clientPromise = client.connect()
+   await mongoose.connect(uri);
+   console.log("Connected to MongoDB.");
+ } catch (error) {
+   console.log("Error connecting to MongoDB:", (error as Error).message);
+ }
+};
 
-export default clientPromise 
+
+export default connectMongoDB;
+

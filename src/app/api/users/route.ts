@@ -1,36 +1,22 @@
 import { NextResponse } from "next/server";
-import { MongoClient } from 'mongodb';
-import { User } from "@/types/user";
-import clientPromise from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { NextRequest } from "next/server";
+import User from "@/models/user";
+import connectMongoDB from "@/lib/mongodb";
 
 
+export async function POST(request: NextRequest) {
+ const{name, email, username, password} = await request.json();
+ await connectMongoDB();
+ await User.create({name, email, username, password});
+ return NextResponse.json({message: "item added successfully"}, {status: 201} )
 
-
-
-export async function GET() {
-  try {
-    const mongoClient = new MongoClient(process.env.MONGODB_URI!);
-    const users = await mongoClient.db().collection<User>('Users').find({}).toArray();
-    console.log(users);
-    return NextResponse.json(users);
-  } catch (error: Error | unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('MongoDB Error:', error);
-    return NextResponse.json({ error: `Failed to fetch users: ${errorMessage}` }, { status: 500 });
-  }
 }
 
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const mongoClient = new MongoClient(process.env.MONGODB_URI!);
-    const result = await mongoClient.db().collection<User>('Users').insertOne(body);
-    
-    return NextResponse.json(result);
-  } catch (error: Error | unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('MongoDB Error:', error);
-    return NextResponse.json({ error: `Failed to create user: ${errorMessage}` }, { status: 500 });
-  }
-} 
+export async function GET() {
+  await connectMongoDB();
+  const Users = await User.find();
+  return NextResponse.json({Users});
+}
+
+
+
