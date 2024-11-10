@@ -32,12 +32,12 @@ export default function Signup(){
 
                 <div className={styles.input}>
                     <img src= {user.src} width={20} alt=""/>
-                    <input type ="fName" placeholder='first name'/>
+                    <input type ="fName" placeholder='First Name'/>
                 </div>
 
                 <div className={styles.input}>
                     <img src= {user.src} width={20} alt=""/>
-                    <input type ="lName" placeholder='last name'/>
+                    <input type ="lName" placeholder='Last Name'/>
                 </div>
 
                 <div className={styles.input}>
