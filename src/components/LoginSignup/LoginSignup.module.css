@@ -69,7 +69,7 @@
     color: #797979;
     font-size: 19px;
 }
-.submit-container{
+.submitcontainer{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,13 +77,13 @@
     padding-bottom: 20px;
 }
 
-.sign-up, .forgot-password{
+.signup, .forgotpassword{
     color:#797979;
     font-size:18px;
     font-weight: 470;
 }
 
-.sign-up span, .forgot-password span{
+.signup span, .forgotpassword span{
     color:#ffffff;
     cursor: pointer;
 }
@@ -102,7 +102,7 @@
     cursor:pointer;
 }
 
-.login-submit{
+.loginsubmit{
     display: flex;
     justify-content: center;
     padding: 25px;
