@@ -1,0 +1,88 @@
+.startingText {
+    text-align: center;
+    color: white;
+    margin-top: 200px;
+    
+}
+
+#firstTextBox {
+    width: 100%;
+    /*
+    margin-left: 50px;
+    margin-right: 60px; */
+    height: 60px;
+    font-size: 20px;
+    
+}
+
+#secondTextBox {
+    width: 100%;
+    /*margin-left: 50px;
+    margin-right: 60px; */
+    height: 500px;
+    background-color: darkgrey;
+
+    
+}
+
+/*
+#secondTextBox::placeholder {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 35px;
+    
+    
+   
+} */
+
+ .text2 input {
+    font-size: 30px;
+    text-align: center;
+    
+}
+
+#outerform {
+    /*border: 20px,solid, brown; */
+    border-color:brown;
+    border-style: solid;
+    border-radius: 10px;
+    padding:0px;
+    margin-right: 40px;
+    margin-left: 40px;
+    border-width: 20px;
+}
+
+#postButton {
+/*
+   display:block;
+   margin-left: auto;
+   margin-right: auto; */
+   font-size: 30px;
+   margin-left: 83%;
+   /*margin-top: 15px; */
+   width:200px;
+   height: 50px; 
+   background-color:red;
+   color:white;
+   border-radius: 15px;
+   border: black, solid
+   
+}
+
+#postButton:hover {
+    background-color: darkred;
+}
+
+#userButton {
+    margin-left:3%;
+    margin-top:0.25%;
+    border-radius: 50%;
+    width: 5%;
+    height: 50px;
+    background-color:red;
+    font-size: 15px;
+    
+}
+#userButton:hover {
+    background-color: blue;
+}

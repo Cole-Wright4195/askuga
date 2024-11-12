@@ -1,3 +1,4 @@
+import HomeScreen from '@/components/HomeScreen/HomeScreen';
 import LoginSignup from '../components/LoginSignup/LoginSignup';
 
 

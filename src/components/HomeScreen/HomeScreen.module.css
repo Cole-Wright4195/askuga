@@ -1,0 +1,204 @@
+.input{
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    width:550px;
+    height:50px;
+    background: #eaeaea;
+    border-radius: 25px;
+
+}
+
+.input input{
+    height : 50px;
+    width: 460px;
+    background:transparent;
+    border: none;
+    outline: none;
+    color: #797979;
+    font-size: 19px;
+    margin: 5px;
+}
+
+.iconMenuContainer{
+    display: inline-block;
+    cursor: pointer;
+}
+
+.iconMenuContainer > div {
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    margin: 4px 8px;
+}
+
+.fixedSearch{
+    top: 10px;
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    
+    z-index: 1;
+}
+.scrollContainer {
+    margin-top: 70px; /* Adjust based on the height of the search bar */
+    overflow-y: auto;
+    height: calc(100vh - 70px); /* Make it take up the full height minus the search bar */
+    padding-bottom: 60px; /* Space for fixed footer if present */
+}
+
+
+
+.spacer {
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 255, 255, 0.175);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 20px;
+    border: solid 3px;
+    border-color: rgb(248, 78, 78);
+    background-color: rgb(248, 78, 78);
+    border-radius: 30px;
+    height: 280px;
+    padding: 0px;
+}
+
+.post {
+    
+    margin: 0 auto;
+    width: auto;
+    height: 180px;
+    background: #eaeaea;
+    
+    /*border-radius: 50px;*/
+}
+
+.postHeader {
+    height: 20px;
+    background-color: grey;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    border: 6px solid grey;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.postBody {
+    
+    background-color: rgb(0, 0, 0);
+    height: 80%;
+    padding: 15px;
+    color: white;
+
+}
+
+.postFooter {
+    display: flex;
+    padding: 10px 50px 10px 15px;
+    background-color: rgb(0, 0, 0);
+    justify-content: space-between;
+    border: 6px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.userIcon {
+    height: 36px;
+    width: 36px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    border: solid 2px black;
+}
+
+.userIcon:hover {
+    border-color: white;
+}
+
+.replyButton {
+    background-color: rgb(207, 74, 74);
+    padding: 0px 20px 0px 20px;
+    text-align: center;
+    border-radius: 30px;
+    border: solid 2px black;
+    cursor: pointer;
+    color: white;
+}
+
+.replyButton:hover {
+    background-color: rgb(149, 0, 0);
+    border-color: white;
+}
+
+.toolContainer {
+
+   align-items: center;
+   justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.myIcon {
+    
+    height: 75px;
+    width: 75px;
+    background-color: #fc6ee9;
+    border-radius: 50%;
+    display: inline-block;
+    justify-items:center;
+    text-align: center;
+    line-height: 75px;
+    cursor: pointer;
+    border: solid 2px black;
+    align-items: flex-start;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.myIcon:hover {
+    border-color: white;
+}
+
+.gearIcon {
+    border: solid 2px purple;
+    padding: 2px;
+    background-color: #b673f9;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+}
+
+.gearIcon:hover {
+    border-color: white;
+}
+
+.makePostButton {
+    
+    position: fixed; /* Stays at the bottom of the screen */
+    bottom: 20px; /* Distance from the bottom of the screen */
+    left: 50%; /* Starts at the center of the screen */
+    transform: translateX(-50%); /* Shifts it to be truly centered */
+    background-color: rgb(207, 74, 74);
+    padding: 10px 40px;
+    border-radius: 30px;
+    border: solid 2px black;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+}
+
+.makePostButton:hover {
+    background-color: rgb(149, 0, 0);
+    border-color: white;
+}
