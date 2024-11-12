@@ -178,6 +178,28 @@
     margin-right: auto;
     border-radius: 30px;
 }
+.gearContainer {
+    position: relative;
+    display: inline-block;
+}
+.gearContainer:hover .logoutMenu {
+    display: block; /* Show the logout menu when hovering over the gear */
+}
+.logoutButton:hover {
+    background-color: darkred;
+}
+.logoutMenu {
+    display: none;
+    position: absolute;
+    top: -30px; /* Adjust based on your layout */
+    right: 0;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
 
 .gearIcon:hover {
     border-color: white;
