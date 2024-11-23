@@ -1,23 +1,26 @@
-"use client"
+'use client'
 import React from 'react'
 import styles from './LoginSignup.module.css'
 import './LoginSignup.module.css'
+import person from '../Assets/person.png'
 import email from '../Assets/email.png'
 import password from '../Assets/password.png'
 import bulldog from '../Assets/bulldog.png'
-import { useRouter } from 'next/navigation'
+import {useRouter} from 'next/navigation';
 
 
-export default function LoginSignup(){
+export default function LoginSignup (){
     const router = useRouter();
 
-    const handleSignup=()=>{
-        router.push('/signup');
-    };
+    const handleSignUp=()=>{
+        router.push('./signup');
+    }
 
-    const handleForgotPassword =()=>{
-        router.push('/forgot');
-    };
+    const handleForgot=()=>{
+        router.push('./forgot');
+    }
+
+
     return (
         <div className={styles.bulldog}>
             <img src={bulldog.src} width={200} alt=""/>
@@ -45,27 +48,11 @@ export default function LoginSignup(){
             </div>
         </div>
         <div className={styles.submitcontainer}>
-            <div className={styles.signup}><button onClick={handleSignup} style={{
-                            backgroundColor: 'transparent',
-                            color: 'white',
-                            padding: '10px 20px',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer',
-                            fontSize:'20px'
-                            }}>Sign-Up</button></div>
-
-            <div className={styles.forgotpassword}><button onClick={handleForgotPassword} style={{
-                            backgroundColor: 'transparent',
-                            color: 'white',
-                            padding: '10px 20px',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer',
-                            fontSize:'20px'
-                            }}>Forgot-Password?</button></div>
+            <div className={styles.signup}onClick={handleSignUp}><span>Sign-Up</span></div>
+            <div className={styles.forgotpassword}onClick={handleForgot}><span>Forgot-Password?</span></div>
           
             </div>
        </div>
     )
 }
+
