@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import styles from "./CreatePost.module.css";
 import { useRouter } from "next/navigation";
+import Post from "@/models/post";
+import User from "@/models/user";
 
 export default function CreateNewPost() {
     const router = useRouter();
@@ -21,7 +23,7 @@ export default function CreateNewPost() {
     };
 
     // Handle change for description input
-    const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setDescription(event.target.value);
     };
 
@@ -31,6 +33,23 @@ export default function CreateNewPost() {
         console.log("Description:", description);
     };
     
+    const createPost = async () => {
+        const user = await User.findOne({username: "ctw39353"}) //testing purposes
+
+    if (!user) {
+        throw new Error("User not found");
+    }
+    const newPost = await Post.create({
+        title: "First Post",
+        content: "This is the content of the first post.",
+        authorId: user._id, // Reference to the User's _id
+    });
+
+    console.log("Post created successfully:", newPost);
+
+
+    }
+
 
     return (
         <div>
@@ -46,19 +65,19 @@ export default function CreateNewPost() {
                         onChange={handleTitleChange}
                     />
                     <div className={styles.text2}>
-                        <input
-                            type="text"
+                        <textarea
+                            
                             id={styles.secondTextBox}
                             name="secondbox"
                             placeholder="Description here..."
                             value={description}
                             onChange={handleDescriptionChange}
-                        />
+                        ></textarea>
                     </div> 
-                    <button type="submit" id={styles.postButton}> 
+                </form>
+                <button type="submit" id={styles.postButton}> 
                         Post
                     </button>
-                </form>
                 
             </div>
         </div>
