@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import User from "@/models/user";
 import connectMongoDB from "@/lib/mongodb";
+import Post from "@/models/post";
 
 
 export async function POST(request: NextRequest) {
@@ -17,6 +18,9 @@ export async function GET() {
   const Users = await User.find();
   return NextResponse.json({Users});
 }
+
+
+ 
 
 
 

@@ -33,23 +33,6 @@ export default function CreateNewPost() {
         console.log("Description:", description);
     };
     
-    const createPost = async () => {
-        const user = await User.findOne({username: "ctw39353"}) //testing purposes
-
-    if (!user) {
-        throw new Error("User not found");
-    }
-    const newPost = await Post.create({
-        title: "First Post",
-        content: "This is the content of the first post.",
-        authorId: user._id, // Reference to the User's _id
-    });
-
-    console.log("Post created successfully:", newPost);
-
-
-    }
-
 
     return (
         <div>
