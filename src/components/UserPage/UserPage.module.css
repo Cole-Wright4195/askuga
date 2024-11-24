@@ -1,0 +1,116 @@
+.toolContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 5px; /* Added unit */
+    width: 100%; /* Ensure container spans the full width */
+}
+
+.bars {
+    display: flex;
+    justify-content: space-between; /* Corrected alignment property */
+    align-items: center;
+    width: 100%; /* Adjust width for better spacing */
+    
+}
+
+.makePostButton1{
+    background-color: rgb(207, 74, 74);
+    margin-left: 40%;
+    padding: 10px 20px 10px 20px;
+    border-radius: 30px;
+    border: solid 2px black;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+.makePostButton2{
+    color: white;
+    margin-right:11%;
+    background-color: rgb(248, 78, 78);
+    padding: 10px 20px 10px 20px;
+    border-radius: 30px;
+    border: solid 2px black;
+    cursor: pointer;
+}
+
+.makePostButton1:hover{
+    border-color: white;
+    background: rgb(149, 0, 0);
+}
+
+.makePostButton2:hover{
+    border-color: white;
+    background: rgb(149, 0, 0);
+}
+
+.gearIcon {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    color: black;
+    font-size: 24px; /* Adjust size as needed */
+    cursor: pointer;
+}
+
+.gearContainer {
+    height: 45px;
+    width: 45px;
+    background-color: grey;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid rgb(0, 0, 0); /* Removed duplicate 'solid' */
+    margin-left: 20px;
+    margin-bottom: 10px;
+    position: relative;
+    flex-direction: column; /* Allow nested elements to stack vertically */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth hover animation */
+    
+}
+
+.gearContainer:hover {
+    background-color: blueviolet;
+   
+    
+}
+
+.gearContainer:hover .logoutMenu {
+    display: flex; /* Show logout menu on hover */
+    background-color: transparent;
+    border-color: transparent;
+    
+}
+
+.logoutMenu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -37px; /* Adjusted for better placement */
+    left: -23px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px; /* Adjust padding for compact design */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    z-index: 1000;
+}
+
+.logoutButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto; /* Ensure button wraps content */
+    height: auto; /* Dynamically adjust height */
+    padding: 5px 10px; /* Add padding for better click area */
+    font-size: 14px; /* A*/
+    border-radius: 10px;
+}
+.logoutButton:hover{
+    background: rgb(149, 0, 0);
+}
