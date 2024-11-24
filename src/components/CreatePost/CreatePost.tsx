@@ -32,7 +32,7 @@ export default function CreateNewPost() {
         console.log("Title:", title);
         console.log("Description:", description);
     };
-    
+    /*
     const createPost = async () => {
         const user = await User.findOne({username: "ctw39353"}) //testing purposes
 
@@ -47,8 +47,8 @@ export default function CreateNewPost() {
 
     console.log("Post created successfully:", newPost);
 
-
-    }
+ */
+   // }
 
 
     return (

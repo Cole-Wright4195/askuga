@@ -5,9 +5,14 @@ import person from '../Assets/person.png'
 import email from '../Assets/email.png'
 import password from '../Assets/password.png'
 import bulldog from '../Assets/bulldog.png'
-
+//import { useRouter } from 'next/navigation';
 
 const LoginSignup = () =>{
+    //const router = useRouter();
+
+    //const handleSignup =()=>{
+        //router.push('/signup');
+   // };
     return (
         <div className={styles.bulldog}>
             <img src={bulldog.src} width={200} alt=""/>
