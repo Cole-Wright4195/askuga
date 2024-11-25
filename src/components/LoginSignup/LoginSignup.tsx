@@ -5,9 +5,14 @@ import person from '../Assets/person.png'
 import email from '../Assets/email.png'
 import password from '../Assets/password.png'
 import bulldog from '../Assets/bulldog.png'
-
+import { useRouter } from 'next/navigation'
 
 const LoginSignup = () =>{
+
+
+
+  
+
     return (
         <div className={styles.bulldog}>
             <img src={bulldog.src} width={200} alt=""/>
@@ -18,7 +23,7 @@ const LoginSignup = () =>{
                 <div className={styles.underline}></div>
 
             </div>
-            <div className= {styles.inputs}>
+            <form className= {styles.inputs}>
 
                 <div className={styles.input}>
                     <img src= {email.src} width={20} alt=""/>
@@ -29,18 +34,18 @@ const LoginSignup = () =>{
                     <img src= {password.src} width={20} alt=""/>
                     <input type ="password" placeholder='password'/>
                 </div>
-            </div>
+            </form>
             <div className={styles.loginsubmit}>
             <div className={styles.submit}>Login</div>
             </div>
         </div>
         <div className={styles.submitcontainer}>
             <div className={styles.signup}><span>Sign-Up</span></div>
-            <div className={styles.forgotpassword}><span>Forgot-Password?</span></div>
+            <button className={styles.forgotpassword}><span>Forgot-Password?</span></button>
           
             </div>
        </div>
     )
 }
 
-export default LoginSignup
+export default LoginSignup;
