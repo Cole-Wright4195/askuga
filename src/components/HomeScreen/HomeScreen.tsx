@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styles from './HomeScreen.module.css';
 import magnifyglass from '../Assets/magnifyglass.png';
 import gear from '../Assets/gear.png';
-import Post from '../../components/HomeScreen/Post';
+import Post from './Post';
 import { useRouter } from 'next/navigation';
 import CreatePost from '../CreatePost/CreatePost';
 

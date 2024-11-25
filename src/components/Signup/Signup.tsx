@@ -47,7 +47,7 @@ export default function SignUp(){
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         //console.log("form data being sent:", account);
 
