@@ -51,27 +51,27 @@ const ReplyCard: React.FC<ReplyCardProps> = ({ title, body, user, comments }) =>
                     {showCommentBox ? 'Cancel' : 'Comment'}
                 </button>
             </div>
-
-            <div className ={styles.commentsSection}>
-                {allComments.map((comment, index)=>(
-                    <CommentCard key={index} user ={comment.user} text={comment.text}/>
-                ))}
-            </div>
-            {showCommentBox && (
-                <div className={styles.commentBox}>
-                    <textarea
-                        value={comment}
-                        onChange={handleInputChange}
-                        placeholder="Write your comment..."
-                        rows={4}
-                        className={styles.textarea}
-                    />
-                    <button onClick={handleSubmit} className={styles.submitButton}>
-                        Submit
-                    </button>
+            
+                <div className ={styles.commentsSection}>
+                    {allComments.map((comment, index)=>(
+                        <CommentCard key={index} user ={comment.user} text={comment.text}/>
+                    ))}
                 </div>
+                
+                {showCommentBox && (
+                    <div className={styles.commentBox}>
+                        <textarea
+                            value={comment}
+                            onChange={handleInputChange}
+                            placeholder="Write your comment..."
+                            rows={4}
+                            className={styles.textarea}/>
+                        <button onClick={handleSubmit} className={styles.submitButton}>Submit</button>
+                    </div>
             )}
+            
         </div>
+
     );
 };
 
