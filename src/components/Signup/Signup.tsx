@@ -7,6 +7,15 @@ import email from '../Assets/email.png'
 import password from '../Assets/password.png'
 import bulldog from '../Assets/bulldog.png'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
+type UserProp = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    username: string;
+    password: string;
+};
 
 export default function SignUp(){
     const router = useRouter();
@@ -18,6 +27,67 @@ export default function SignUp(){
     const handleForgotPassword =()=>{
         router.push('/forgot');
     };
+
+    const [account, setAccount] = useState<UserProp>({
+        firstName: "",
+        lastName: "",
+        email: "",
+        username: "",
+        password: ""
+    });
+
+    const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setAccount(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        //console.log("form data being sent:", account);
+
+        setLoading(true);
+
+        try {
+            const response = await fetch("http://localhost:3000/api/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(account),
+            });
+
+            if (!response.ok) {
+                throw new Error("Registration failed!");
+            }
+
+            const data = await response.json();
+            //console.log("Server response:", data); // Log the server's response
+
+            setAccount(
+                {
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    username: "",
+                    password: ""
+                });
+
+            router.push('/home');
+        } catch (err) {
+            //console.error("Error during fetch:", err);
+            setError("Something went wrong!");
+        } finally {
+            setLoading(false);
+        }
+ 
+    };
+
     return (
         <div className={styles.bulldog}>
             <img src={bulldog.src} width={200} alt=""/>
@@ -28,37 +98,74 @@ export default function SignUp(){
                     <div className={styles.underline}></div>
 
             </div>
-            <div className= {styles.inputs}>
+            <form onSubmit={handleSubmit} className= {styles.inputs}>
 
                 <div className={styles.input}>
                     <img src= {user.src} width={20} alt=""/>
-                    <input type ="fName" placeholder='First Name'/>
+                    <input
+                        type="text"
+                        name="firstName" 
+                        placeholder='First Name'
+                        value={account.firstName}
+                        onChange={handleInputChange}
+                        required
+                    />
                 </div>
 
                 <div className={styles.input}>
                     <img src= {user.src} width={20} alt=""/>
-                    <input type ="lName" placeholder='Last Name'/>
+                    <input
+                        type="text"
+                        name="lastName"
+                        placeholder='Last Name'
+                        value={account.lastName}
+                        onChange={handleInputChange}
+                        required
+                    />
                 </div>
 
                 <div className={styles.input}>
                     <img src= {email.src} width={20} alt=""/>
-                    <input type ="email" placeholder='email'/>
-                </div>
-
-                <div className={styles.input}>
-                    <img src= {password.src} width={20} alt=""/>
-                    <input type ="password" placeholder='password'/>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder='Email'
+                        value={account.email}
+                        onChange={handleInputChange}
+                        required
+                    />
                 </div>
 
                 <div className={styles.input}>
                     <img src= {user.src} width={20} alt=""/>
-                    <input type ="userName" placeholder='Username'/>
+                    <input
+                    type="text"
+                    name="username"
+                    placeholder='Username'
+                    value={account.username}
+                    onChange={handleInputChange}
+                    required
+                    />
                 </div>
 
-            </div>
-            <div className={styles.loginsubmit}>
-                <div className={styles.submit}>Sign Up</div>
-            </div>
+                <div className={styles.input}>
+                    <img src= {password.src} width={20} alt=""/>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder='Password'
+                        value={account.password}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+
+                <div className={styles.loginsubmit}>
+                    <button type="submit" disabled={loading} className={styles.submit}>Sign Up</button>
+                </div>
+                
+            </form>
+            
         </div>
         <div className={styles.submitcontainer}>
             <div className={styles.signup}><button onClick={handleLogin} style={{

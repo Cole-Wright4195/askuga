@@ -1,22 +1,33 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
 interface userInterface extends Document {
-    name: string;
-    email?: string;
-    username?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    username: string;
     password: string;
 }
 
+/** Make the sections below required. And username and email should be UNIQUE */
+
 const userSchema = new Schema<userInterface>({
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
         type: String,
         required: true,
     },
     email: {
         type: String,
+        required: true,
+        unique: true,
     },
     username: {
         type: String,
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -24,5 +35,5 @@ const userSchema = new Schema<userInterface>({
     },
 });
 
-const User: Model<userInterface> = mongoose.models.User || mongoose.model<userInterface>("User", userSchema);
+const User = mongoose.models.User || mongoose.model<userInterface>("User", userSchema);
 export default User;

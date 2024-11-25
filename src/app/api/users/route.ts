@@ -3,13 +3,43 @@ import { NextRequest } from "next/server";
 import User from "@/models/user";
 import connectMongoDB from "@/lib/mongodb";
 import Post from "@/models/post";
+import bcrypt from 'bcryptjs';
+
 
 
 export async function POST(request: NextRequest) {
- const{name, email, username, password} = await request.json();
- await connectMongoDB();
- await User.create({name, email, username, password});
- return NextResponse.json({message: "item added successfully"}, {status: 201} )
+  try {
+    const{firstName, lastName, email, username, password} = await request.json();
+    //console.log('Received data:', { firstName, lastName, email, username, password });
+
+    await connectMongoDB();
+    
+    let user = await User.findOne({ email });
+    if (user) {
+      return NextResponse.json({ message: "User already registered!"}, {status: 409});
+    }
+      
+    user = await User.findOne({ username });
+    if (user) {
+      return NextResponse.json({ message: "Username is already taken!"}, {status: 409});
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 5);
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      email,
+      username,
+      password: hashedPassword
+    });
+    await newUser.save();
+
+    return NextResponse.json( {message: "You have registered successfully!"}, {status: 201} );
+} catch (err) {
+    return NextResponse.json( {message: "Something went wrong!" }, {status: 500} );
+}
+ 
+ 
 
 }
 

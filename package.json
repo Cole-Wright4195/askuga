@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "askuga": "file:",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.0",
     "next": "15.0.2",
+    "next-auth": "^5.0.0-beta.25",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
