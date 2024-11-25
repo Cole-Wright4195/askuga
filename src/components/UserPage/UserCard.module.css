@@ -1,4 +1,4 @@
-body{
+.body{
     height: auto;
 }
 .userInfo{
@@ -11,24 +11,42 @@ body{
    border-bottom-right-radius: 10; */
    color: rgb(255, 255, 255);
 }
+.iconContainer{
+    display: flex;
+justify-content: space-between;
+align-items: center;
+width:100%;
+
+}
+.bulldogButton{
+    background-color: transparent;
+    border: none;
+}
+
+.bulldogIcon:hover{
+    cursor: pointer;
+
+}
+.profilePic{
+    padding-left: 45%;
+}
+
 
 .myIcon{
     height: 90px;
     width: 90px;
     background-color: rgb(248, 78, 78);
     border-radius: 50%;
-    display: inline-block;
-    justify-items:center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
     text-align: center;
     font-size: 35px;
-    line-height: 90px;
     border: solid 2px black;
-    align-items: flex-start;
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin: 10px;
+    
 }
+
 
 .title{
     color: white;

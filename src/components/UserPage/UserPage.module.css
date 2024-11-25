@@ -7,15 +7,16 @@
     width: 100%; /* Ensure container spans the full width */
 }
 
-.bars {
+ .bars {
     display: flex;
-    justify-content: space-between; /* Corrected alignment property */
+    justify-content: space-between; 
     align-items: center;
-    width: 100%; /* Adjust width for better spacing */
+    width: 100%; 
     
-}
+} 
 
-.makePostButton1{
+
+/* .makePostButton1{
     background-color: rgb(207, 74, 74);
     margin-left: 40%;
     padding: 10px 20px 10px 20px;
@@ -43,7 +44,7 @@
 .makePostButton2:hover{
     border-color: white;
     background: rgb(149, 0, 0);
-}
+} */
 
 .gearIcon {
     display: flex;

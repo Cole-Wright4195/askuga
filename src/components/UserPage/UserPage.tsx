@@ -18,6 +18,7 @@ import styles from './UserPage.module.css';
 import gear from '../Assets/gear.png';
 import Post from './Post';
 import {useRouter} from 'next/navigation';
+import bulldog from '../Assets/bulldog.png'
 
 export default function UserPage() {
     const router =useRouter();
@@ -63,8 +64,7 @@ export default function UserPage() {
                     </div>
 
                     <div className={styles.bars}>
-                        <button onClick={handleNewPost} className={styles.makePostButton1}>New Post</button>
-                        <button onClick={handleHomeScreen} className={styles.makePostButton2}>Feed</button>
+                    
                     </div>
                 </div>
             </div>
