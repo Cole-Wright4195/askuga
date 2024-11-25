@@ -10,7 +10,7 @@ import bcrypt from 'bcryptjs';
 export async function POST(request: NextRequest) {
   try {
     const{firstName, lastName, email, username, password} = await request.json();
-    console.log('Received data:', { firstName, lastName, email, username, password });
+    //console.log('Received data:', { firstName, lastName, email, username, password });
 
     await connectMongoDB();
     

@@ -44,40 +44,12 @@ export default function SignUp(){
         }));
     };
 
-    /*const [firstInput, setFirstInput] = useState<string>('');
-    const [lastInput, setLastInput] = useState<string>('');
-    const [emailInput, setEmailInput] = useState<string>('');
-    const [usernameInput, setUsernameInput] = useState<string>('');
-    const [passwordInput, setPasswordInput] = useState<string>('');
-    */
-
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-  /*  const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFirstInput(e.target.value);
-    };
-
-    const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLastInput(e.target.value);
-    };
-
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmailInput(e.target.value);
-    };
-
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsernameInput(e.target.value);
-    };
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPasswordInput(e.target.value);
-    };
-    */
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("form data being sent:", account);
+        //console.log("form data being sent:", account);
 
         setLoading(true);
 
@@ -95,14 +67,7 @@ export default function SignUp(){
             }
 
             const data = await response.json();
-            console.log("Server response:", data); // Log the server's response
-
-            /*setFirstInput('');
-            setLastInput('');
-            setEmailInput('');
-            setUsernameInput('');
-            setPasswordInput('');
-            */
+            //console.log("Server response:", data); // Log the server's response
 
             setAccount(
                 {
@@ -115,27 +80,12 @@ export default function SignUp(){
 
             router.push('/home');
         } catch (err) {
-            console.error("Error during fetch:", err);
+            //console.error("Error during fetch:", err);
             setError("Something went wrong!");
         } finally {
             setLoading(false);
         }
  
-        /*setAccount(
-            {
-                firstName: firstInput,
-                lastName: lastInput,
-                email: emailInput,
-                username: usernameInput,
-                password: passwordInput
-            });
-        */
-        /*setFirstInput('');
-        setLastInput('');
-        setEmailInput('');
-        setUsernameInput('');
-        setPasswordInput('');
-        */
     };
 
     return (
