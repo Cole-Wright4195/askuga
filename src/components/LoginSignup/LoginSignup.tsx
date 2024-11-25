@@ -29,7 +29,7 @@ const LoginSignup = () =>{
                 <div className={styles.underline}></div>
 
             </div>
-            <div className= {styles.inputs}>
+            <form className= {styles.inputs}>
 
                 <div className={styles.input}>
                     <img src= {email.src} width={20} alt=""/>
@@ -40,7 +40,7 @@ const LoginSignup = () =>{
                     <img src= {password.src} width={20} alt=""/>
                     <input type ="password" placeholder='password'/>
                 </div>
-            </div>
+            </form>
             <div className={styles.loginsubmit}>
             <div className={styles.submit}>Login</div>
             </div>
@@ -54,4 +54,4 @@ const LoginSignup = () =>{
     )
 }
 
-export default LoginSignup
+export default LoginSignup;

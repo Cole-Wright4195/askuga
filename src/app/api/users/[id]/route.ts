@@ -19,9 +19,9 @@ export async function GET(request:NextRequest, {params}:RouteParams) {
 
 export async function PUT(request:NextRequest, {params}:RouteParams) {
     const {id} = params;
-    const {title: title, email: email, username: username, password: password} = await request.json();
+    const {firstName: firstName, lastName: lastName, email: email, username: username, password: password} = await request.json();
     await connectMongoDB();
-    const user = await User.findByIdAndUpdate(id,{title, email, username, password});
+    const user = await User.findByIdAndUpdate(id,{firstName, lastName, email, username, password});
     return NextResponse.json({message: "item updated successfully"}, {status: 200});
 }
 
