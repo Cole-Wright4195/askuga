@@ -1,0 +1,42 @@
+.header {
+    color: #ffffff;
+    font-size:48px;
+    font-weight: 700;
+    text-align: center;
+}
+.bulletedList {
+    color:aqua;
+    font-size: 24px;
+}
+.forPics {
+display:flex;
+justify-content: space-between;
+
+}
+.questionPicStyle {
+    border-radius: 15px;
+    margin-left: 10px;
+}
+.bulldogPicStyle {
+    border-radius: 15px;
+    margin-right: 20px; 
+}
+.signupButtonStyle {
+    margin-top: 100px;
+    width: 100px;
+    height:50px;
+}
+.loginButtonStyle {
+    margin-top: 100px;
+    width: 50px;
+    
+}
+
+.formatRouteLabels {
+    color: white;
+    font-size: 30px;
+    margin-top:100px;
+}
+.formatRouteLabels:hover {
+    color:red;
+}
