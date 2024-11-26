@@ -78,7 +78,7 @@ export default function SignUp(){
                     password: ""
                 });
 
-            router.push('/home');
+            router.push('/login');
         } catch (err) {
             //console.error("Error during fetch:", err);
             setError("Something went wrong!");

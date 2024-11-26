@@ -34,7 +34,7 @@ function DescriptionComponent() {
             <div className={styles.forPics}>
             <img className={styles.questionPicStyle} src={questionpic.src} width={300} alt="questionpic"/>
             <p className={styles.formatRouteLabels} onClick={handleSignup}> Signup Page</p>
-            <p className={styles.formatRouteLabels} onClick={handleLoggin}> Loggin Page</p>
+            <p className={styles.formatRouteLabels} onClick={handleLoggin}> Login Page</p>
             <img className={styles.bulldogPicStyle} src={bulldog.src} width={300} alt="bulldog"/>
             </div>
         </div>

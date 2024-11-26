@@ -71,7 +71,7 @@ const LoginSignup = () => {
         console.log("form data being sent: ", account);
 
         try {
-            const response = await doCredentialLogin(new FormData(e.target));
+            const response = await doCredentialLogin(new FormData(e.target as HTMLFormElement));
             if (response?.error) {
                 alert("Login failed. Please check your credentials.");
             } else {
