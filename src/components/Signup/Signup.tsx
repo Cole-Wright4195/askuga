@@ -47,7 +47,7 @@ export default function SignUp(){
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         //console.log("form data being sent:", account);
 
@@ -139,12 +139,12 @@ export default function SignUp(){
                 <div className={styles.input}>
                     <img src= {user.src} width={20} alt=""/>
                     <input
-                    type="text"
-                    name="username"
-                    placeholder='Username'
-                    value={account.username}
-                    onChange={handleInputChange}
-                    required
+                        type="text"
+                        name="username"
+                        placeholder='Username'
+                        value={account.username}
+                        onChange={handleInputChange}
+                        required
                     />
                 </div>
 
