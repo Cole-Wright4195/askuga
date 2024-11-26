@@ -1,3 +1,4 @@
+
 //'use server'
 "use client"
 import React from 'react'
@@ -7,6 +8,7 @@ import person from '../Assets/person.png'
 import email from '../Assets/email.png'
 import password from '../Assets/password.png'
 import bulldog from '../Assets/bulldog.png'
+
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
@@ -88,6 +90,7 @@ const LoginSignup = () => {
     }
     
 
+
     return (
         <div className={styles.bulldog}>
             <img src={bulldog.src} width={200} alt=""/>
@@ -135,7 +138,7 @@ const LoginSignup = () => {
         <div className={styles.submitcontainer}>
             <div onClick={handleSignup} className={styles.signup}><span>Sign-Up</span></div>
             <div onClick={handleForgotPasswordPage} className={styles.forgotpassword}><span>Forgot-Password?</span></div>
-          
+
             </div>
        </div>
     )
