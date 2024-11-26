@@ -1,3 +1,4 @@
+//'use server'
 "use client"
 import React from 'react'
 import styles from './LoginSignup.module.css'
@@ -15,12 +16,13 @@ type UserProp = {
     password: string;
 };
 
+
 /*export async function doLogout() {
     await signOut({ redirectTo: "/"});
 }
 */
 
-/*export async function doCredentialLogin(formData: FormData): Promise<any> {
+export async function doCredentialLogin(formData: FormData): Promise<any> {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
@@ -35,7 +37,7 @@ type UserProp = {
         throw err;
     }
     
-}*/
+}
 
 const LoginSignup = () => {
 
@@ -65,6 +67,19 @@ const LoginSignup = () => {
     const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("form data being sent: ", account);
+
+        try {
+            const response = await doCredentialLogin(new FormData(e.target));
+            if (response?.error) {
+                alert("Login failed. Please check your credentials.");
+            } else {
+                console.log("Login successful", response);
+                
+                router.push("/home");
+            }
+        } catch (err) {
+            console.error("An error occurred during login:", err);
+        }
 
         setAccount({
             email: "",
