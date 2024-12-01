@@ -11,7 +11,8 @@ import bulldog from '../Assets/bulldog.png'
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
+
+import { signIn, signOut } from 'next-auth/react'
 
 type UserProp = {
     email: string;
@@ -20,15 +21,21 @@ type UserProp = {
 
 
 /*export async function doLogout() {
+    try {
+    "use server"
     await signOut({ redirectTo: "/"});
-}
-*/
+    } catch (err: any) {
+        throw err;
+    }
+}*/
 
 export async function doCredentialLogin(formData: FormData): Promise<any> {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
+        "use server"
+        
         const response = await signIn("credentials", {
             email,
             password,

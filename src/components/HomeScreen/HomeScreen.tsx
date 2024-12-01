@@ -1,17 +1,106 @@
 "use client";
 import mongoose, { Model } from 'mongoose';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './HomeScreen.module.css';
 import magnifyglass from '../Assets/magnifyglass.png';
 import gear from '../Assets/gear.png';
 import Post from './Post';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import CreatePost from '../CreatePost/CreatePost';
 
+import { auth } from '@/auth';
+import { getSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
+
+export async function doLogout() {
+    try {
+    "use server"
+    await signOut({ redirectTo: "/login"});
+    } catch (err: any) {
+        throw err;
+    }
+}
+
+
+
+/*export async function UserAvatar() {
+    try {
+        "use server"
+        const session = await auth();
+        console.log(session);
+
+        if (!session?.user) return null;
+
+        return (
+            <div>
+                <span className={styles.myIcon}>AA</span>
+            </div>
+        )
+        
+    } catch (err: any) {
+        throw err;
+    }
+}*/
+
+type userDetails = {
+
+};
+
 const HomeScreenComponent = () => {
+    const { data: session, status } = useSession();
+    const params = useParams(); // If you also want to use route params
+    const userID = session?.user?.id; // Extract userID from session
+  
+    // State to store fetched user data and error/loading state
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    // Only fetch the user data when the userID is available
+    useEffect(() => {
+      if (!userID) {
+        setError('User ID is missing');
+        setLoading(false);
+        return;
+      }
+  
+      const fetchUser = async () => {
+        try {
+          console.log('Fetching user data for userID:', userID);
+  
+          const response = await fetch(`http://localhost:3000/api/users/${userID}`);
+  
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+  
+          const data = await response.json();
+          console.log('Fetched data:', data);
+          setUserData(data); // Set the fetched user data
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+          setError('Error fetching user details');
+          setLoading(false);
+        }
+      };
+  
+      fetchUser(); // Call the fetchUser function
+    }, [userID]); // Dependency array to rerun effect when userID changes
+    
+    
+    
+    const firstName = session?.user?.firstName || "X";
+    const lastName = session?.user?.lastName || "X";
+
     const [showLogout, setShowLogout] = useState(false);
     const [showNewPostModal, setShowNewPostModal] = useState(false);
-    const router = useRouter();
+
+
+    
+
+    
 
     const handleGearClick = () => {
         setShowLogout(!showLogout);
@@ -20,7 +109,8 @@ const HomeScreenComponent = () => {
     const handleLogout = () => {
     
         console.log('Logging out...');
-        router.push('/login'); 
+        //router.push('/login');
+        doLogout();
     };
 
     const handleNewPostClick = () => {
@@ -45,6 +135,7 @@ const HomeScreenComponent = () => {
     ];
 
     return (
+    
         <div>
             <div className={styles.fixedSearch}>
                 <div className={styles.input}>
@@ -63,7 +154,9 @@ const HomeScreenComponent = () => {
                 ))}
                 <div className={styles.toolContainer}>
                     <button className={styles.makePostButton} onClick = {handleNewPostClick}>New Post</button>
-                    <span className={styles.myIcon}>JH</span>
+                    <span className={styles.myIcon}>
+                        {firstName} {lastName}
+                    </span>
                     <div className={styles.gearContainer}>
                         <span className={styles.gearIcon}>
                             <img src={gear.src} width={17} alt="Settings" />
@@ -88,6 +181,7 @@ const HomeScreenComponent = () => {
                 </div>
             )}
         </div>
+       
     );
 };
 

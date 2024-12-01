@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "./models/user";
+import connectMongoDB from "./lib/mongodb";
 
 export const {
     handlers: { GET, POST },
@@ -14,13 +15,14 @@ export const {
     providers: [
         CredentialsProvider({
             credentials: {
-                email: { label: "email", type: "email"},
-                password: { label: "password", type: "password"},
+                email: {},
+                password: {},
             },
             async authorize(credentials) {
                 if (!credentials) return null;
 
                 try {
+                    await connectMongoDB();
                     // Look up the user in the databse using provided credentials
                     const user = await User.findOne({ email: credentials.email }).lean();
 
@@ -50,4 +52,16 @@ export const {
             },
         }),
     ],
+    callbacks: {
+        async jwt({ token, user }) {
+          if (user) { // User is available during sign-in
+            token.id = user.id
+          }
+          return token
+        },
+        async session({ session, token }) {
+          session.user.id = token.id
+          return session
+        },
+      },
 });

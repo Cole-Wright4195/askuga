@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.7.4",
     "askuga": "file:",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
-    "mongodb": "^6.10.0",
+    "mongodb": "^6.11.0",
     "mongoose": "^8.8.0",
     "next": "15.0.2",
     "next-auth": "^5.0.0-beta.25",
