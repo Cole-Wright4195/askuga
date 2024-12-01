@@ -13,6 +13,7 @@ import { getSession, signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { SessionProvider } from 'next-auth/react';
 
+
 export async function doLogout() {
     try {
     "use server"
@@ -44,7 +45,13 @@ export async function doLogout() {
 }*/
 
 type userDetails = {
-
+    user: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        username: string;
+        password: string;
+    }
 };
 
 const HomeScreenComponent = () => {
@@ -53,7 +60,19 @@ const HomeScreenComponent = () => {
     const userID = session?.user?.id; // Extract userID from session
   
     // State to store fetched user data and error/loading state
-    const [userData, setUserData] = useState(null);
+
+
+    //const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState<userDetails>({
+        user: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            username: "",
+            password: "",
+        }
+    });
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
   
@@ -89,17 +108,21 @@ const HomeScreenComponent = () => {
       fetchUser(); // Call the fetchUser function
     }, [userID]); // Dependency array to rerun effect when userID changes
     
+
     
     
-    const firstName = session?.user?.firstName || "X";
-    const lastName = session?.user?.lastName || "X";
+    
 
     const [showLogout, setShowLogout] = useState(false);
     const [showNewPostModal, setShowNewPostModal] = useState(false);
 
 
     
+        const firstName = userData.user.firstName;
+        const lastName = userData.user.lastName;
 
+        console.log(firstName);
+    
     
 
     const handleGearClick = () => {
