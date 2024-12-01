@@ -7,28 +7,30 @@
     border-color: rgb(248, 78, 78);
     background-color: rgb(248, 78, 78);
     border-radius: 30px;
-    height: 280px;
+    /*min-height: 280px;*/
     padding: 0px;
+
 }
 
 .post {
     
     margin: 0 auto;
     width: auto;
-    height: 180px;
+    
     background: #eaeaea;
     
     /*border-radius: 50px;*/
 }
 
 .postHeader {
-    height: 20px;
+    height: 30px;
     background-color: grey;
     padding: 10px;
     color: rgb(0, 0, 0);
     border: 6px solid grey;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
+    font-size: 25px;
 }
 
 .postBody {
@@ -37,6 +39,10 @@
     height: 80%;
     padding: 15px;
     color: white;
+    word-wrap: break-word; /* Ensure long words break correctly */
+    overflow-wrap: break-word; /* Additional word-breaking support */
+    height: auto;
+    font-size: 24px;
 
 }
 .spacer {

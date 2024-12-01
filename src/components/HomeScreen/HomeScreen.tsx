@@ -1,5 +1,5 @@
 "use client";
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, ObjectId } from 'mongoose';
 import React, { useEffect, useState } from 'react';
 import styles from './HomeScreen.module.css';
 import magnifyglass from '../Assets/magnifyglass.png';
@@ -45,6 +45,16 @@ export async function doLogout() {
     }
 }*/
 
+
+type postProps = {
+    post: {
+        title: string;
+        content: string;
+        authorId: string | ObjectId;  // reference to the User who created it
+        createdAt: Date | string;
+    }
+}
+
 type userDetails = {
     user: {
         firstName: string;
@@ -60,8 +70,13 @@ const HomeScreenComponent = () => {
     const { data: session, status } = useSession();
     const params = useParams(); // If you also want to use route params
     const userID = session?.user?.id;
-    const [posts, setPosts] = useState([]); // Extract userID from session
+    const [posts, setPosts] = useState<postProps[]>([]); // Extract userID from session
     const [shouldFetchPosts, setShouldFetchPosts] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    //const filteredData = posts.filter(item =>
+      //  item.post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    //  );
+
    
   
     // State to store fetched user data and error/loading state
@@ -111,7 +126,7 @@ const HomeScreenComponent = () => {
       };
       const fetchPosts = async () => {
         try {
-            const response = await fetch('/api/users/Posts'); // Adjust the route to your API
+            const response = await fetch(`/api/users/Posts?q=${encodeURIComponent(searchQuery)}`); // Adjust the route to your API
             if (!response.ok) {
                 throw new Error('Failed to fetch posts');
             }
@@ -128,12 +143,14 @@ const HomeScreenComponent = () => {
 
       fetchPosts();
       fetchUser(); // Call the fetchUser function
-    }, [userID, shouldFetchPosts]); // Dependency array to rerun effect when userID changes
+    }, [userID, shouldFetchPosts, searchQuery]); // Dependency array to rerun effect when userID changes
     
 
     
     
-    
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value); // Update search query state
+    };
     const handleNewPostCreated = () => {
         setShouldFetchPosts((prev) => !prev); // Toggle state to re-trigger useEffect
     };
@@ -193,13 +210,14 @@ const HomeScreenComponent = () => {
                         <div></div>
                         <div></div>
                     </span>
-                    <input type="text" placeholder='search' />
-                    <img src={magnifyglass.src} width={20} alt="" />
+                    <input type="text" placeholder='search' value={searchQuery}
+                        onChange={handleSearchChange}/>
+                    <img src={magnifyglass.src} width={20} alt=""/>
                 </div>
             </div>
             <div className={styles.scrollContainer}>
                 {posts.map((post, index) => (
-                    <Post key={index} title={post.title} content={post.content} name={post.name} createdAt={post.createdAt} authorId={'n/a'} />
+                    <Post key={index} title={post.title} content={post.content} name = {post.name} createdAt={post.createdAt} authorId={'n/a'} />
                 ))}
                 <div className={styles.toolContainer}>
                     <button className={styles.makePostButton} onClick = {handleNewPostClick}>New Post</button>
