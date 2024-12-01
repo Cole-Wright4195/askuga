@@ -9,7 +9,7 @@
 
 .bars {
     display: flex;
-    justify-content: space-between; /* Corrected alignment property */
+    justify-content: center; /* Corrected alignment property */
     align-items: center;
     width: 100%; /* Adjust width for better spacing */
     
@@ -27,7 +27,6 @@
 
 .makePostButton2{
     color: white;
-    margin-right:11%;
     background-color: rgb(248, 78, 78);
     padding: 10px 20px 10px 20px;
     border-radius: 30px;
