@@ -12,6 +12,7 @@ import { auth } from '@/auth';
 import { getSession, signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { SessionProvider } from 'next-auth/react';
+import CreateNewPost from '../CreatePost/CreatePost';
 
 
 export async function doLogout() {
@@ -55,9 +56,13 @@ type userDetails = {
 };
 
 const HomeScreenComponent = () => {
+    const router = useRouter();
     const { data: session, status } = useSession();
     const params = useParams(); // If you also want to use route params
-    const userID = session?.user?.id; // Extract userID from session
+    const userID = session?.user?.id;
+    const [posts, setPosts] = useState([]); // Extract userID from session
+    const [shouldFetchPosts, setShouldFetchPosts] = useState(false);
+   
   
     // State to store fetched user data and error/loading state
 
@@ -74,7 +79,7 @@ const HomeScreenComponent = () => {
     });
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
   
     // Only fetch the user data when the userID is available
     useEffect(() => {
@@ -104,17 +109,37 @@ const HomeScreenComponent = () => {
           setLoading(false);
         }
       };
-  
+      const fetchPosts = async () => {
+        try {
+            const response = await fetch('/api/users/Posts'); // Adjust the route to your API
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts');
+            }
+
+            const data = await response.json();
+            setPosts(data.Posts); // Assuming the API returns { Posts: [...] }
+            setLoading(false);
+        } catch (err) {
+            console.error('Error fetching posts:', err);
+            setError('Error fetching posts');
+            setLoading(false);
+        }
+    };
+
+      fetchPosts();
       fetchUser(); // Call the fetchUser function
-    }, [userID]); // Dependency array to rerun effect when userID changes
+    }, [userID, shouldFetchPosts]); // Dependency array to rerun effect when userID changes
     
 
     
     
     
-
+    const handleNewPostCreated = () => {
+        setShouldFetchPosts((prev) => !prev); // Toggle state to re-trigger useEffect
+    };
     const [showLogout, setShowLogout] = useState(false);
     const [showNewPostModal, setShowNewPostModal] = useState(false);
+    
 
 
     
@@ -143,6 +168,7 @@ const HomeScreenComponent = () => {
     const closeNewPostModal = () => {
         setShowNewPostModal(false); // Hide the modal
     };
+    
 
     const dummyPosts = [
         { title: 'UGA Transfer Program?', content: 'Hey guys, I was wondering what were the best ways to get involved in the school after transferring from out of state? Thanks.', name: 'AB', athorId: 'asoasduoasbf0' , createdAt : 'date' },
@@ -172,11 +198,12 @@ const HomeScreenComponent = () => {
                 </div>
             </div>
             <div className={styles.scrollContainer}>
-                {dummyPosts.map((post, index) => (
+                {posts.map((post, index) => (
                     <Post key={index} title={post.title} content={post.content} name={post.name} createdAt={post.createdAt} authorId={'n/a'} />
                 ))}
                 <div className={styles.toolContainer}>
                     <button className={styles.makePostButton} onClick = {handleNewPostClick}>New Post</button>
+            
                     <span className={styles.myIcon}>
                         {firstName} {lastName}
                     </span>
@@ -196,7 +223,7 @@ const HomeScreenComponent = () => {
               {showNewPostModal && (
                 <div className={styles.modalBackdrop}>
                     <div className={styles.modalContent}>
-                        <CreatePost />
+                        <CreatePost/>
                         <button className={styles.closeButton} onClick={closeNewPostModal}>
                             Close
                         </button>

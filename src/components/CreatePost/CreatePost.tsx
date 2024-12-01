@@ -4,11 +4,14 @@ import styles from "./CreatePost.module.css";
 import { useRouter } from "next/navigation";
 import Post from "@/models/post";
 import User from "@/models/user";
+import { useSession } from "next-auth/react";
 
 export default function CreateNewPost() {
     const router = useRouter();
 
     // State variables for form inputs
+    const { data: session, status } = useSession();
+    const userID = session?.user?.id;
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
@@ -16,7 +19,9 @@ export default function CreateNewPost() {
         console.log("Button clicked!");
     };
 
-
+    const refreshPage = () => {
+        router.refresh(); // Refresh the current page
+    };
     // Handle change for title input
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
@@ -28,10 +33,47 @@ export default function CreateNewPost() {
     };
 
    
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        console.log("Title:", title);
-        console.log("Description:", description);
-    };
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Prevent default form submission
+      
+        if (!title || !description) {
+          alert("Please fill in all fields.");
+          return;
+        }
+      
+        try {
+          const response = await fetch("/api/users/Posts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              title,
+              content: description,
+              authorId: session?.user?.id, // Get authorId from session
+            }),
+          });
+      
+          if (!response.ok) {
+            const error = await response.json();
+            alert(`Error: ${error.message}`);
+            return;
+          }
+      
+          const data = await response.json();
+          console.log("Post created:", data);
+      
+          // Clear the form or navigate elsewhere
+          setTitle("");
+          setDescription("");
+          router.push("/home");
+          window.location.reload()
+           // Redirect to home or another page
+        } catch (error) {
+          console.error("Error creating post:", error);
+          alert("An error occurred while creating the post.");
+        }
+      };
     
 
     return (
@@ -57,10 +99,10 @@ export default function CreateNewPost() {
                             onChange={handleDescriptionChange}
                         ></textarea>
                     </div> 
-                </form>
-                <button type="submit" id={styles.postButton}> 
+                    <button type="submit" id={styles.postButton}> 
                         Post
                     </button>
+                </form>
                 
             </div>
         </div>
