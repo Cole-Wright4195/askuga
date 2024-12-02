@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.4",
+    "@types/nodemailer": "^6.4.17",
     "askuga": "file:",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.11.0",
     "mongoose": "^8.8.0",
     "next": "15.0.2",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^20.17.4",
     "@types/react": "^18",
