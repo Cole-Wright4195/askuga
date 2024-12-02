@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Reply.module.css';
-import CommentCard from './CommentCard';
+import CommentCard from '../PostWithReplies/CommentCard';
 
 
 interface Comment{

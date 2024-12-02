@@ -113,3 +113,11 @@
 .logoutButton:hover{
     background: rgb(149, 0, 0);
 }
+.scrollContainer {
+   
+    align-items: center;
+    margin-top: 70px;
+    overflow-y: auto;
+    height:100vh;
+    padding-bottom: 60px;  /* Optional: Ensure consistent background */
+}

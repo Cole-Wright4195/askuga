@@ -7,6 +7,7 @@ import gear from '../Assets/gear.png';
 import Post from './Post';
 import { useParams, useRouter } from 'next/navigation';
 import CreatePost from '../CreatePost/CreatePost';
+import bulldog from '../Assets/bulldog.png'
 
 import { auth } from '@/auth';
 import { getSession, signOut } from 'next-auth/react';
@@ -166,22 +167,13 @@ const HomeScreenComponent = () => {
     };
     
 
-    const dummyPosts = [
-        { title: 'UGA Transfer Program?', content: 'Hey guys, I was wondering what were the best ways to get involved in the school after transferring from out of state? Thanks.', name: 'AB', athorId: 'asoasduoasbf0' , createdAt : 'date' },
-        { title: 'Sports Waiver?', content: 'I am trying to sign up for club sports here and they say I need a waiver of some sort? How do I get this?', name: 'CD', authorId: "rouadsfadsf", createdAt : 'date' },
-        { title: 'Computer Science?', content: 'How rigorous is the comp sci program here at uga? can anyone speak from experience?', name: 'EF' , athorId: 'asoqwerasduoasbf0' , createdAt : 'date'  },
-        { title: 'Hobbies around Athens', content: 'I’m a first-year here and I am struggling to find things to do as it’s a very different environment than where I am from initially, any help would be appreciated.', name: 'GH', athorId: 'asoasduwrqrrrdoasbf0' , createdAt : 'date'  },
-        {title: 'Hobbies around Athens', content: 'I’m a first-year here and I am struggling to find things to do as it’s a very different environment than where I am from initially, any help would be appreciated.', name: 'GH', athorId: 'asoasduwrqrrrdoasbf0' , createdAt : 'date' },
-        {title: 'Hobbies around Athens', content: 'I’m a first-year here and I am struggling to find things to do as it’s a very different environment than where I am from initially, any help would be appreciated.', name: 'GH', athorId: 'asoasduwrqrrrdoasbf0' , createdAt : 'date' },
-        {title: 'Hobbies around Athens', content: 'I’m a first-year here and I am struggling to find things to do as it’s a very different environment than where I am from initially, any help would be appreciated.', name: 'GH', athorId: 'asoasduwrqrrrdoasbf0' , createdAt : 'date' },
-        {title: 'Hobbies around Athens', content: 'I’m a first-year here and I am struggling to find things to do as it’s a very different environment than where I am from initially, any help would be appreciated.', name: 'GH', athorId: 'asoasduwrqrrrdoasbf0' , createdAt : 'date' }
-        
-
-    ];
-
     return (
+
+        
     
         <div>
+          
+             
             <div className={styles.fixedSearch}>
                 <div className={styles.input}>
                     <span className={styles.iconMenuContainer}>
@@ -193,18 +185,44 @@ const HomeScreenComponent = () => {
                         onChange={handleSearchChange}/>
                     <img src={magnifyglass.src} width={20} alt=""/>
                 </div>
+                
             </div>
+
             <div className={styles.scrollContainer}>
-                {posts.map((post, index) => (
-                    <Post key={index} title={post.title} content={post.content} name = {post.name} createdAt={post.createdAt} authorId={'n/a'} />
-                    
-                ))}
+            <div>
+                <div className = {styles.bulldog}>
+                    <img src = {bulldog.src} width = {200} alt = "bulldog"/>
+                </div>
+                
+            </div>
+            {posts
+        .sort((a, b) => {
+            // Convert createdAt to Date objects for comparison
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            return dateB.getTime() - dateA.getTime(); // Sort in descending order
+        })
+        .map((post, index) => (
+            <Post 
+                key={index} 
+                _id={post._id}
+                title={post.title} 
+                content={post.content} 
+                name={post.name} 
+                createdAt={post.createdAt} 
+                authorId={post.authorId} 
+            />
+        ))}
                 <div className={styles.toolContainer}>
                     <button className={styles.makePostButton} onClick = {handleNewPostClick}>New Post</button>
             
-                    <span className={styles.myIcon}>
-                        {firstName[0]}{lastName[0]}
-                    </span>
+                        <span
+                className={styles.myIcon}
+                onClick={() => router.push(`../../userpage`)} // Route to user page with userID
+                style={{ cursor: 'pointer' }} // Add pointer cursor for better UX
+            >
+                {firstName[0]}{lastName[0]}
+            </span>
                     <div className={styles.gearContainer}>
                         <span className={styles.gearIcon}>
                             <img src={gear.src} width={17} alt="Settings" />
@@ -229,6 +247,7 @@ const HomeScreenComponent = () => {
                 </div>
             )}
         </div>
+        
        
     );
 };

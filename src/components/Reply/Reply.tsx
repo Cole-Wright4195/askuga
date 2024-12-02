@@ -1,41 +1,59 @@
 "use client"
-import React, {useState} from 'react';
-import styles from './Reply.module.css';
-import ReplyCard from './ReplyCard';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
+const PostDetail: React.FC = () => {
+    const router = useRouter();
+    const { postId } = router.query; // Get postId from the URL
+    const [post, setPost] = useState(null);
+    const [replies, setReplies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-const dummyPosts = [
-    { title: 'UGA Transfer Program?', body: 'Hey guys, I was wondering what were the best ways to get involved in the school after transferring from out of state? Thanks.', user: 'AB', 
-        comments: [
-            { user: 'User1', text: 'This is comment from user1 ' },
-            { user: 'User2', text: 'this is comment from second user' },
-        ],
-        
-    }
-];
+    useEffect(() => {
+        const fetchPostAndReplies = async () => {
+            if (!postId) return; // Ensure postId is available
 
+            try {
+                const response = await fetch(`http://localhost:3000/api/users/Posts/${postId}`);
+                const data = await response.json();
 
+                if (response.ok) {
+                    setPost(data.post);
+                    setReplies(data.replies);
+                } else {
+                    setError(data.error || "Failed to fetch post");
+                }
+            } catch (err) {
+                console.error("Error fetching post and replies:", err);
+                setError("Error fetching post and replies");
+            } finally {
+                setLoading(false);
+            }
+        };
 
+        fetchPostAndReplies();
+    }, [postId]);
 
-export default function Reply (){
-    
-    
-    return(
-        
-<div className={styles.container}>
-{dummyPosts.map((post, index) => (
-                <ReplyCard
-                    key={index}
-                    title={post.title}
-                    body={post.body}
-                    user={post.user}
-                    comments={post.comments}
-                />
-            ))}
-            
-            
-</div>
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
 
+    return (
+        <div>
+            <h1>{post.title}</h1>
+            <p>{post.content}</p>
+            <h2>Replies:</h2>
+            {replies.length > 0 ? (
+                replies.map((reply) => (
+                    <div key={reply._id}>
+                        <p>{reply.content}</p>
+                    </div>
+                ))
+            ) : (
+                <p>No replies yet.</p>
+            )}
+        </div>
+    );
+};
 
-    )
-} 
+export default PostDetail;

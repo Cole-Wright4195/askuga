@@ -155,7 +155,7 @@
     
     height: 75px;
     width: 75px;
-    background-color: #fc6ee9;
+    background-color: black;
     border-radius: 50%;
     display: inline-block;
     justify-items:center;
@@ -167,6 +167,7 @@
     margin-right: 20px;
     margin-left: 20px;
     margin-bottom: 5px;
+    color:white;
 }
 
 .myIcon:hover {
@@ -264,4 +265,33 @@
 
 .closeButton:hover {
     background-color: darkred;
+}
+.bulldog {
+    display: flex;
+    justify-content: center; /* Center the bulldog image */
+    margin-top: 100px; /* Add some space above the image */
+    margin-bottom: 20px;
+     /* Add some space below the image */
+}
+.bulldog img {
+    width: 300px; /* Increase width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+.header {
+    text-align: center; /* Center the header text */
+    margin-bottom: 20px; /* Add space below the header */
+}
+
+.text {
+    font-size: 24px; /* Adjust font size for the logo */
+    font-weight: bold; /* Make the text bold */
+}
+
+.underline {
+    width: 100px; /* Adjust width as needed */
+    height: 4px; /* Adjust height as needed */
+    background-color: black; /* Change color as needed */
+    margin: 10px auto; /* Center the underline */
 }
