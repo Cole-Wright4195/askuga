@@ -25,27 +25,6 @@ export async function doLogout() {
 }
 
 
-
-/*export async function UserAvatar() {
-    try {
-        "use server"
-        const session = await auth();
-        console.log(session);
-
-        if (!session?.user) return null;
-
-        return (
-            <div>
-                <span className={styles.myIcon}>AA</span>
-            </div>
-        )
-        
-    } catch (err: any) {
-        throw err;
-    }
-}*/
-
-
 type postProps = {
     post: {
         title: string;
@@ -218,12 +197,13 @@ const HomeScreenComponent = () => {
             <div className={styles.scrollContainer}>
                 {posts.map((post, index) => (
                     <Post key={index} title={post.title} content={post.content} name = {post.name} createdAt={post.createdAt} authorId={'n/a'} />
+                    
                 ))}
                 <div className={styles.toolContainer}>
                     <button className={styles.makePostButton} onClick = {handleNewPostClick}>New Post</button>
             
                     <span className={styles.myIcon}>
-                        {firstName} {lastName}
+                        {firstName[0]}{lastName[0]}
                     </span>
                     <div className={styles.gearContainer}>
                         <span className={styles.gearIcon}>
@@ -254,3 +234,4 @@ const HomeScreenComponent = () => {
 };
 
 export default HomeScreenComponent;
+

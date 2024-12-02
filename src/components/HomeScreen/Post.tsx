@@ -28,3 +28,7 @@ const Post: React.FC<PostProps> = ({ title, content, name,}) => {
 };
 
 export default Post;
+
+
+
+
