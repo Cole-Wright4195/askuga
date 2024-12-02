@@ -9,8 +9,9 @@ interface RouteParams {
     params: {id: string};
 }
 
+
 export async function GET(request:NextRequest, {params}:RouteParams) {
-    const {id} = params;
+    const {id} = await params;
     await connectMongoDB();
     const user = await User.findOne({_id: id});
     return NextResponse.json({user}, {status: 200});
