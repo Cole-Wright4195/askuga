@@ -165,8 +165,14 @@ const HomeScreenComponent = () => {
     const closeNewPostModal = () => {
         setShowNewPostModal(false); // Hide the modal
     };
-    
-
+    if (status === "unauthenticated") {
+        return (
+            <div>
+                Please Log in to view Home!
+            </div>
+        )
+    }
+    if(status === "authenticated") {
     return (
 
         
@@ -250,6 +256,7 @@ const HomeScreenComponent = () => {
         
        
     );
+}
 };
 
 export default HomeScreenComponent;

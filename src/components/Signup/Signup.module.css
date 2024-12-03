@@ -1,3 +1,6 @@
+.body{
+    height:auto;
+} 
 .bulldog{
     display: flex;
     flex-direction: column;
@@ -41,8 +44,12 @@
 .inputs{
     margin-top:55px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap:25px;
+}
+.error{
+    color: white;
 }
 
 .input{

@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import styles from './Signup.module.css'
-import './Signup.module.css'
 import user from '../Assets/person.png'
 import email from '../Assets/email.png'
 import password from '../Assets/password.png'
@@ -42,6 +41,11 @@ export default function SignUp(){
             ...prevState,
             [name]: value
         }));
+        if(name==="email" && !value.endsWith("@uga.edu")){
+            setError("Must use UGA email to register")
+        }else{
+            setError("");
+        }
     };
 
     const [error, setError] = useState("");
@@ -51,7 +55,12 @@ export default function SignUp(){
         e.preventDefault();
         //console.log("form data being sent:", account);
 
+        if(!account.email.endsWith("@uga.edu")){
+            setError("Must use UGA email to register");
+            return;
+        }
         setLoading(true);
+        setError("");
 
         try {
             const response = await fetch("http://localhost:3000/api/users", {
@@ -61,12 +70,12 @@ export default function SignUp(){
                 },
                 body: JSON.stringify(account),
             });
-
+            const data = await response.json();
             if (!response.ok) {
-                throw new Error("Registration failed!");
+                throw new Error(data.message||"Registration failed!");
             }
 
-            const data = await response.json();
+            
             //console.log("Server response:", data); // Log the server's response
 
             setAccount(
@@ -79,9 +88,9 @@ export default function SignUp(){
                 });
 
             router.push('/login');
-        } catch (err) {
+        } catch (err:any) {
             //console.error("Error during fetch:", err);
-            setError("Something went wrong!");
+            setError(err.message);
         } finally {
             setLoading(false);
         }
@@ -98,6 +107,9 @@ export default function SignUp(){
                     <div className={styles.underline}></div>
 
             </div>
+            <form onSubmit={handleSubmit} className={styles.inputs}>
+            {error && <div className={styles.error}>{error}</div>}
+            </form>
             <form onSubmit={handleSubmit} className= {styles.inputs}>
 
                 <div className={styles.input}>
@@ -123,7 +135,7 @@ export default function SignUp(){
                         required
                     />
                 </div>
-
+            
                 <div className={styles.input}>
                     <img src= {email.src} width={20} alt=""/>
                     <input
