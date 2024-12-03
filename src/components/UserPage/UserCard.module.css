@@ -13,6 +13,7 @@
 }
 
 .myIcon{
+    display: flex;
     height: 90px;
     width: 90px;
     background-color: rgb(248, 78, 78);
@@ -24,8 +25,7 @@
     line-height: 90px;
     border: solid 2px black;
     align-items: flex-start;
-    margin-right: 20px;
-    margin-left: 20px;
+    
     margin-top: 10px;
     margin-bottom: 5px;
 }

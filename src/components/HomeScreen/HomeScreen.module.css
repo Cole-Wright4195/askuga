@@ -263,6 +263,7 @@
     cursor: pointer;
 }
 
+
 .closeButton:hover {
     background-color: darkred;
 }

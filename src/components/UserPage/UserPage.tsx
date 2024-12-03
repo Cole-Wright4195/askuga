@@ -22,7 +22,7 @@ export default function UserPage() {
     const router = useRouter();
     const [userPosts, setUserPosts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
     const { data: session, status } = useSession();
 
    
@@ -97,7 +97,7 @@ export default function UserPage() {
                     <div className={styles.bars}>
                       
                         <button onClick={handleHomeScreen} className={styles.makePostButton2}>
-                            Feed
+                            Back to Home
                         </button>
                     </div>
                 </div>

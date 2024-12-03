@@ -1,0 +1,98 @@
+
+.startingText {
+    text-align: center;
+    color: white;
+    margin-top: 200px;
+    
+}
+
+#firstTextBox {
+    width: 100%;
+    /*
+    margin-left: 50px;
+    margin-right: 60px; */
+    height: 60px;
+    font-size: 20px;
+    border-radius:25px;
+    
+}
+
+#secondTextBox {
+    margin-top: 20px;
+    width: 100%;
+    height: 500px;
+    background-color: #1C1B1B; /* Background color */
+    color: white; /* Font color when typing */
+    font-size: 18px; /* Adjust font size as needed */
+    padding: 10px; /* Adds space between the text and the edges */
+    text-align: start; /* Ensures text starts at the left */
+    vertical-align: top; /* Ensures text starts at the top */
+    border-radius: 10px; /* Optional: Make the box have rounded corners */
+    border: 1px solid #333; /* Optional: Add a border */
+    outline: none; /* Removes the default outline when focused */
+    resize: none; /* Prevents resizing of the box if it's a textarea */
+    box-sizing: border-box; /* Includes padding in width/height */
+
+    
+}
+
+/*
+#secondTextBox::placeholder {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 35px;
+    
+    
+   
+} */
+
+ .text2 input {
+    margin-top: 20px;
+    font-size: 30px;
+    text-align: start;
+    border-radius: 25px;
+    
+}
+
+#outerform {
+    display:block;
+    /*border: 20px,solid, brown; */
+    width: 65%;
+    background-color: black;
+    border-color:black;
+    border-style: solid;
+    border-radius: 35px;
+    padding:0px;
+    margin-left:15%;
+    margin-right:50%;
+    border-width: 60px;
+}
+
+#postButton {
+/*
+   display:block;
+   margin-left: auto;
+   margin-right: auto; */
+   display:block;
+   position: fixed; /* Stays at the bottom of the screen */
+   bottom: 20px; /* Distance from the bottom of the screen */
+   left: 50%; /* Starts at the center of the screen */
+   transform: translateX(-50%); /* Shifts it to be truly centered */
+   background-color: #E4002B;
+   padding: 10px 40px;
+   border-radius: 30px;
+   border: solid 2px black;
+   cursor: pointer;
+   color: white;
+   font-size: large;
+   width:160px;
+   
+   
+   
+}
+
+#postButton:hover {
+    background-color: darkred;
+}
+
+
