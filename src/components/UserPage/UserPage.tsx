@@ -22,7 +22,7 @@ export default function UserPage() {
     const router = useRouter();
     const [userPosts, setUserPosts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     const { data: session, status } = useSession();
 
    
@@ -66,6 +66,26 @@ export default function UserPage() {
         fetchPosts();
     }, [userId]);
 
+    const postReload =async (data :string)=>{
+      if(data){
+        try {
+            const response = await fetch(`/api/users/getUserPosts?USER=${encodeURIComponent(userId)}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts');
+            }
+
+            const data = await response.json();
+            setUserPosts(data.posts); 
+        } catch (err) {
+            console.error('Error fetching posts:', err);
+            setError('Error fetching posts');
+        } finally {
+            setLoading(false);
+        }
+      }
+
+    }
+
 
     return (
         <div>
@@ -73,12 +93,15 @@ export default function UserPage() {
                 
                     {userPosts.map((post, index) => (
                         <Post
+
                             key={index}
+                            _id={post._id}
                             title={post.title}
                             content={post.content}
                             name={post.name}
                             createdAt={post.createdAt}
                             authorId={post.authorId}
+                            postReload={postReload}
                         />
                     ))}
                 
@@ -97,7 +120,7 @@ export default function UserPage() {
                     <div className={styles.bars}>
                       
                         <button onClick={handleHomeScreen} className={styles.makePostButton2}>
-                            Back to Home
+                            Feed
                         </button>
                     </div>
                 </div>
@@ -105,3 +128,8 @@ export default function UserPage() {
         </div>
     );
 }
+
+
+
+
+

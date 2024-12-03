@@ -70,9 +70,7 @@ export default function UserCard() {
     <div className={styles.userInfo}>
       <span className={styles.myIcon}>
         {firstName[0]}
-        
         {lastName[0]}
-        
       </span>
       <div className={styles.container}>
         <h2>{firstName}{" "}{lastName}</h2>
@@ -84,3 +82,6 @@ export default function UserCard() {
     </div>
   );
 }
+
+
+
